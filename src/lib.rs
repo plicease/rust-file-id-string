@@ -73,7 +73,6 @@ mod tests {
 
         // Cleanup
         let _ = std::fs::remove_file(&tmp_file_path);
-
     }
 
     #[test]
