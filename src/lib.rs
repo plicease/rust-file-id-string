@@ -4,13 +4,15 @@ use std::path::Path;
 use std::os::unix::fs::MetadataExt;
 
 #[cfg(windows)]
-use std::os::windows::io::AsRawHandle;
+use std::fs::File;
 #[cfg(windows)]
 use std::mem::MaybeUninit;
 #[cfg(windows)]
-use windows_sys::Win32::Storage::FileSystem::{GetFileInformationByHandle, BY_HANDLE_FILE_INFORMATION};
+use std::os::windows::io::AsRawHandle;
 #[cfg(windows)]
-use std::fs::File;
+use windows_sys::Win32::Storage::FileSystem::{
+    BY_HANDLE_FILE_INFORMATION, GetFileInformationByHandle,
+};
 
 pub fn file_unique_id(path: &Path) -> Option<String> {
     #[cfg(unix)]
