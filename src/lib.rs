@@ -67,9 +67,17 @@ mod tests {
         }
 
         // Ensure calling file_unique_id does not panic
-        let _ = file_unique_id(&tmp_file_path);
+        let id = file_unique_id(&tmp_file_path);
+
+        println!("id = {:?}", id);
 
         // Cleanup
         let _ = std::fs::remove_file(&tmp_file_path);
+    }
+
+    #[test]
+    fn test_bogus_file() {
+        let id = file_unique_id(Path::new("bogus.txt"));
+        assert_eq!(id, None);
     }
 }
